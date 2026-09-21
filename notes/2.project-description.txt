@@ -1,0 +1,96 @@
+1. Why this is a good project
+
+The project forces us to answer real engineering questions.
+
+For example:
+
+Where does the video go?
+
+OPFS.
+
+Where do we store the video's name?
+
+IndexedDB.
+
+Where do we store the MIME type?
+
+IndexedDB.
+
+Where do we store the actual binary data?
+
+OPFS.
+
+How do we find a video?
+
+Search IndexedDB.
+
+How do we display it?
+
+Find its metadata in IndexedDB → locate the file in OPFS → obtain a File → create a browser URL.
+
+What happens when deleting?
+
+Remove the actual file from OPFS and its metadata from IndexedDB.
+
+So we're not artificially combining the two APIs.
+
+They genuinely have different responsibilities.
+
+2. What we're going to build
+
+Our final UI will look approximately like:
+
+┌─────────────────────────────────────────────────────────┐
+│                    LocalVault                           │
+│                                                         │
+│  Local file storage using OPFS + IndexedDB             │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐    │
+│  │             Select Files                       │    │
+│  └─────────────────────────────────────────────────┘    │
+│                                                         │
+│  Search: [________________________]                     │
+│                                                         │
+│  12 files                                               │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐    │
+│  │ 🎬 lecture.mp4                                  │    │
+│  │ 182 MB • video/mp4                              │    │
+│  │                                                 │    │
+│  │ Added: Sep 20, 2026                             │    │
+│  │                                                 │    │
+│  │ [Preview]                         [Delete]       │    │
+│  └─────────────────────────────────────────────────┘    │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐    │
+│  │ 📄 notes.pdf                                    │    │
+│  │ 2.4 MB • application/pdf                        │    │
+│  │                                                 │    │
+│  │ [Open]                            [Delete]       │    │
+│  └─────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────┘
+
+But we're going to start much smaller.
+
+3. Technology
+
+We'll use:
+
+React
+JavaScript
+Vite
+IndexedDB
+OPFS
+CSS
+
+No backend.
+
+No PostgreSQL.
+
+No Express.
+
+No external storage library initially.
+
+I specifically want you to understand the browser APIs themselves.
+
+Later we can introduce libraries if there's a reason.
